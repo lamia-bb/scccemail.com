@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 // ── Embed STC Forward fonts as base64 ────────────────────────────────────────
 const FONT_BOLD_B64 = "/fonts/STCForward-Bold.ttf";
@@ -344,7 +344,6 @@ const injectStyles = () => {
   `;
   document.head.appendChild(style);
 };
-injectStyles();
 
 
 type EmailTemplateProps = {
@@ -444,6 +443,8 @@ export default function App() {
   const [closingContent, setClosingContent] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  useEffect(() => { injectStyles(); }, []);
 
   const addBullet    = () => setBullets(b => [...b, ""]);
   const removeBullet = (i:number)  => setBullets(b => b.filter((_, idx) => idx !== i));
