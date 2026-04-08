@@ -28,7 +28,7 @@ const injectStyles = () => {
 
     :root {
       --purple: #4F008B;
-      --red: #e8001c;
+      --red: #FF375E;
       --white: #ffffff;
       --sidebar-bg: #111120;
       --border: #252538;
@@ -333,7 +333,7 @@ const injectStyles = () => {
     .tpl-regards {
       font-size: clamp(12px, 1.9vw, 14px);
       font-weight: 400;
-      color: #e8001c;
+      color: #FF375E;
       margin-top: 4px;
       font-family: var(--font);
     }
