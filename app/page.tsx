@@ -347,6 +347,7 @@ const injectStyles = () => {
 
 
 type EmailTemplateProps = {
+  esiText?: string;
   title?: string;
   content?: string;
   bullets?: string[];
@@ -357,6 +358,7 @@ type EmailTemplateProps = {
 
 // ── Email Template Preview ────────────────────────────────────────────────────
 function EmailTemplate({
+  esiText = "ESI",
   title = "",
   content = "",
   bullets = [],
@@ -383,6 +385,12 @@ function EmailTemplate({
 
       {/* Purple body */}
       <div className="tpl-body">
+        {/* ESI label */}
+        <div className="tpl-esi">
+          <div className="tpl-esi-dot" />
+          <span className="tpl-esi-label">{esiText || "ESI"}</span>
+        </div>
+
         {/* Title */}
         <div className={subTitle ? "" : "tpl-title-only"}>
           <div className="tpl-title">{mainTitle}</div>
@@ -436,6 +444,7 @@ function EmailTemplate({
 
 // ── Main App ──────────────────────────────────────────────────────────────────
 export default function App() {
+  const [esiText, setEsiText] = useState("ESI");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [bullets, setBullets] = useState([""]);
@@ -500,7 +509,7 @@ export default function App() {
             <!-- ESI -->
             <div style="display:flex;align-items:center;gap:10px;padding:20px 0 24px;">
               <div style="width:11px;height:11px;background:#e8001c;border-radius:2px;flex-shrink:0;"></div>
-              <span style="font-size:15px;font-weight:700;color:#fff;font-family:'STCForward',sans-serif;">ESI</span>
+              <span style="font-size:15px;font-weight:700;color:#fff;font-family:'STCForward',sans-serif;">${esiText}</span>
             </div>
             <!-- Title block -->
             <div style="margin-bottom:${subTitle ? "0" : "22px"};">
@@ -579,7 +588,7 @@ export default function App() {
     } finally {
       setLoading(false);
     }
-  }, [title, content, bullets, sectionTitle, closingContent]);
+  }, [esiText, title, content, bullets, sectionTitle, closingContent]);
 
   const activeBulletCount = bullets.filter(b => b.trim()).length;
 
@@ -596,6 +605,18 @@ export default function App() {
         </div>
 
         <div className="sidebar-body">
+
+          <div className="field">
+            <label className="field-label">ESI Label</label>
+            <input
+              className="bullet-input"
+              type="text"
+              placeholder="ESI"
+              value={esiText}
+              onChange={e => setEsiText(e.target.value)}
+              maxLength={50}
+            />
+          </div>
 
           <div className="field">
             <label className="field-label">Email Title</label>
@@ -708,7 +729,7 @@ export default function App() {
         </div>
 
         <div className="canvas-wrapper">
-          <EmailTemplate title={title} content={content} bullets={bullets} sectionTitle={sectionTitle} closingContent={closingContent} />
+          <EmailTemplate esiText={esiText} title={title} content={content} bullets={bullets} sectionTitle={sectionTitle} closingContent={closingContent} />
         </div>
 
         <div className="preview-meta" style={{ justifyContent: "center" }}>
