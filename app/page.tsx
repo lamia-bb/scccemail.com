@@ -606,8 +606,8 @@ export default function App() {
       <aside className="sidebar">
         <div className="sidebar-header">
           <div className="brand-row">
-            <span className="brand-pill">SCCC</span>
-            <span className="brand-subtitle">by STC · Announce Studio</span>
+            <span className="brand-pill">sccc by stc</span>
+            <span className="brand-subtitle">by ESI · Announcement Studio</span>
           </div>
           <div className="sidebar-heading">Announcement<br />Generator</div>
         </div>
@@ -615,7 +615,7 @@ export default function App() {
         <div className="sidebar-body">
 
           <div className="field">
-            <label className="field-label">ESI Label</label>
+            <label className="field-label">'From' Label</label>
             <input
               className="bullet-input"
               type="text"
