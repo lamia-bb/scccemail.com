@@ -260,7 +260,7 @@ const injectStyles = () => {
       width: 10px; height: 10px;
       background: #FF375E;
       border-radius: 1px;
-      display: inline-block;
+      flex-shrink: 0;
     }
     .tpl-esi-label {
       font-size: 13px;
@@ -509,8 +509,8 @@ export default function App() {
           <div style="background:#4F008B;padding:0 44px 48px;font-family:'STCForward',sans-serif;">
             <!-- ESI -->
             <div style="display:flex;align-items:center;gap:10px;padding:20px 0 24px;">
-              <div style="width:11px;height:11px;background:#FF375E;border-radius:2px;flex-shrink:0;"></div>
-              <span style="font-size:15px;font-weight:400;color:#9F4ADC;font-family:'STCForward',sans-serif;">${esiText}</span>
+              <div style="width:11px;height:11px;background:#FF375E;border-radius:2px;flex-shrink:0;align-self:center;margin-top:1px;"></div>
+              <span style="font-size:15px;font-weight:500;color:#9F4ADC;line-height:1;font-family:'STCForward',sans-serif;">${esiText}</span>
             </div>
             <!-- Title block -->
             <div style="margin-bottom:${subTitle ? "0" : "22px"};">
