@@ -255,19 +255,25 @@ const injectStyles = () => {
       align-items: center;
       gap: 8px;
       padding: 16px 0 20px;
+      line-height: 10px;        /* match the dot height */
+
     }
     .tpl-esi-dot {
-      width: 10px; height: 10px;
+      width: 10px;
+      height: 10px;
       background: #FF375E;
       border-radius: 1px;
       flex-shrink: 0;
+      display: block; 
     }
     .tpl-esi-label {
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 500; 
       color: #9743D4;
       letter-spacing: 0.05em;
       font-family: var(--font);
+      line-height: 10px;         /* force label box to match dot */
+      display: inline-block;
     }
     .tpl-title {
       font-size: clamp(17px, 3.2vw, 24px);
