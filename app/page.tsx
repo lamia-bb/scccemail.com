@@ -383,7 +383,7 @@ function EmailTemplate({
   return (
     <div className="email-tpl">
       {/* Header image — top portion of the template background */}
-      <div style={{ position: "relative", width: "100%", paddingBottom: "57%", overflow: "hidden" }}>
+      <div style={{ position: "relative", width: "100%", paddingBottom: "50%", overflow: "hidden" }}>
         <img
           src={TEMPLATE_BG}
           alt=""
@@ -486,7 +486,7 @@ export default function App() {
       const titleLines = (title || "Email Announcement Title").split("\n");
       const mainTitle = titleLines[0] || "Email Announcement Title";
       const subTitle = titleLines.slice(1).join(" ").trim();
-      const imgH = Math.round(EXPORT_W * 0.57);
+      const imgH = Math.round(EXPORT_W * 0.50);
       const secTitle = sectionTitle || "What's changing";
 
       // Build off-screen render node with fully inline styles + embedded fonts
@@ -517,7 +517,7 @@ export default function App() {
             <!-- ESI -->
             <div style="display:flex;align-items:center;gap:10px;padding:20px 0 24px;">
               <div style="width:11px;height:11px;background:#e8001c;border-radius:2px;flex-shrink:0;"></div>
-              <span style="font-size:15px;font-weight:700;color:#fff;font-family:'STCForward',sans-serif;">${esiText}</span>
+              <span style="font-size:15px;font-weight:400;color:#9F4ADC;font-family:'STCForward',sans-serif;">${esiText}</span>
             </div>
             <!-- Title block -->
             <div style="margin-bottom:${subTitle ? "0" : "22px"};">
