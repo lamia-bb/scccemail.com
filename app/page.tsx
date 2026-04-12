@@ -566,7 +566,7 @@ export default function App() {
 
       const el = container.querySelector("div:not(style)") || container.children[1];
       const canvas = await window.html2canvas(el as HTMLElement, {
-        scale: 2,
+        scale: 1,
         allowTaint: true,
         backgroundColor: null,
         width: EXPORT_W,
