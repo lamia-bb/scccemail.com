@@ -519,7 +519,7 @@ export default function App() {
             <!-- ESI -->
             <div style="display:flex;align-items:center;gap:10px;padding:20px 0 24px;">
               <div style="width:10px;height:10px;background:#FF375E;border-radius:1px;flex-shrink:0;"></div>
-              <span style="font-size:15px;font-weight:500;color:#9F4ADC;line-height:10;font-family:'STCForward',sans-serif;">${esiText}</span>
+              <span style="font-size:15px;font-weight:500;color:#9F4ADC;line-height:10px;font-family:'STCForward',sans-serif;">${esiText}</span>
             </div>
             <!-- Title block -->
             <div style="margin-bottom:${subTitle ? "0" : "22px"};">
