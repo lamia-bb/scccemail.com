@@ -260,14 +260,8 @@ const injectStyles = () => {
 
     }
     .tpl-esi-dot {
-      width: 10px;
-      height: 10px;
-      background: #FF375E;
-      border-radius: 1px;
       flex-shrink: 0;
-      align-self: center;
-      /* kill sub-pixel positioning */
-      transform: translateY(0);
+      display: block;
     }
 
     .tpl-esi-label {
