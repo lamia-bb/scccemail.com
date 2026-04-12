@@ -518,8 +518,8 @@ export default function App() {
           <div style="background:#4F008B;padding:0 44px 48px;font-family:'STCForward',sans-serif;">
             <!-- ESI -->
             <div style="display:flex;align-items:center;gap:10px;padding:20px 0 24px;">
-              <div style="width:10px;height:10px;background:#FF375E;border-radius:1px;flex-shrink:0;align-self:center;margin-top:1px;"></div>
-              <span style="font-size:15px;font-weight:500;color:#9F4ADC;line-height:1;font-family:'STCForward',sans-serif;">${esiText}</span>
+              <div style="width:10px;height:10px;background:#FF375E;border-radius:1px;flex-shrink:0;"></div>
+              <span style="font-size:15px;font-weight:500;color:#9F4ADC;line-height:10;font-family:'STCForward',sans-serif;">${esiText}</span>
             </div>
             <!-- Title block -->
             <div style="margin-bottom:${subTitle ? "0" : "22px"};">
@@ -542,8 +542,8 @@ export default function App() {
             <div style="margin-bottom:18px;display:flex;flex-direction:column;gap:11px;">
               ${activeBullets.map(b => `
                 <div style="display:flex;gap:13px;align-items:center;">
-                  <div style="width:10px;height:10px;background:#FF375E;border-radius:2px;flex-shrink:0;margin-top:5px;"></div>
-                  <span style="font-size:15px;font-weight:400;color:#fff;line-height:1.6;word-break:break-word;font-family:'STCForward',sans-serif;">${b}</span>
+                  <div style="width:10px;height:10px;background:#FF375E;border-radius:1px;flex-shrink:0;"></div>
+                  <span style="font-size:15px;font-weight:400;color:#fff;line-height:1.25;word-break:break-word;font-family:'STCForward',sans-serif;">${b}</span>
                 </div>
               `).join("")}
             </div>
@@ -555,7 +555,7 @@ export default function App() {
             </div>
             ` : ""}
             <!-- Best regards -->
-            <div style="font-size:15px;font-weight:400;color:#FF375E;margin-top:6px;font-family:'STCForward',sans-serif;">Best regards,</div>
+            <div style="font-size:15px;font-weight:400;color:#FF375E;font-family:'STCForward',sans-serif;">Best regards,</div>
           </div>
         </div>
       `;
@@ -566,7 +566,7 @@ export default function App() {
 
       const el = container.querySelector("div:not(style)") || container.children[1];
       const canvas = await window.html2canvas(el as HTMLElement, {
-        scale: 1,
+        scale: 2,
         allowTaint: true,
         backgroundColor: null,
         width: EXPORT_W,
