@@ -260,7 +260,7 @@ const injectStyles = () => {
       width: 10px; height: 10px;
       background: #FF375E;
       border-radius: 1px;
-      flex-shrink: 0;
+      display: inline-block;
     }
     .tpl-esi-label {
       font-size: 13px;
