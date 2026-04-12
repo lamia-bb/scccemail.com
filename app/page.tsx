@@ -400,7 +400,10 @@ function EmailTemplate({
       <div className="tpl-body">
         {/* ESI label */}
         <div className="tpl-esi">
-          <div className="tpl-esi-dot" />
+          <svg width="10" height="10" className="tpl-esi-dot" xmlns="http://www.w3.org/2000/svg">
+            <rect width="10" height="10" rx="1" fill="#FF375E" />
+          </svg>
+          {/* <div className="tpl-esi-dot" /> */}
           <span className="tpl-esi-label">{esiText || "ESI"}</span>
         </div>
 
@@ -570,19 +573,12 @@ export default function App() {
       const el = container.querySelector("div:not(style)") || container.children[1];
       const canvas = await window.html2canvas(el as HTMLElement, {
         scale: 2,
-        letterRendering: true, //new
-        useCORS: true, // new
         allowTaint: true,
         backgroundColor: null,
         width: EXPORT_W,
         logging: false,
         onclone: (doc: Document) => {
-          //this area is new, if it fails remove it
-          const dots = doc.querySelectorAll('.tpl-esi-dot');
-          dots.forEach((d) => {
-            (d as HTMLElement).style.transform = 'translateZ(0)';
-          });
-          //this area is new
+
           const s = doc.createElement("style");
           s.textContent = `
             @font-face { font-family:'STCForward'; src:url('${FONT_REG_B64}') format('truetype'); font-weight:400; }
