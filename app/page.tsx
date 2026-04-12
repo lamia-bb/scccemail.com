@@ -255,7 +255,8 @@ const injectStyles = () => {
       align-items: center;
       gap: 8px;
       padding: 16px 0 20px;
-      line-height: 10px;        /* match the dot height */
+      height: 32px;          /* explicit, even */
+      box-sizing: content-box;
 
     }
     .tpl-esi-dot {
@@ -264,16 +265,21 @@ const injectStyles = () => {
       background: #FF375E;
       border-radius: 1px;
       flex-shrink: 0;
-      display: block; 
+      align-self: center;
+      /* kill sub-pixel positioning */
+      transform: translateY(0);
     }
+
     .tpl-esi-label {
-      font-size: 13px;
-      font-weight: 500; 
+      font-size: 14px;       /* was 13px — 13 is odd, causes half-pixel line box */
+      line-height: 16px;     /* even, and matches dot vertical rhythm */
+      font-weight: 500;
       color: #9743D4;
       letter-spacing: 0.05em;
       font-family: var(--font);
-      line-height: 10px;         /* force label box to match dot */
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      height: 16px;
     }
     .tpl-title {
       font-size: clamp(17px, 3.2vw, 24px);
@@ -564,16 +570,23 @@ export default function App() {
       const el = container.querySelector("div:not(style)") || container.children[1];
       const canvas = await window.html2canvas(el as HTMLElement, {
         scale: 2,
-        useCORS: true,
+        letterRendering: true, //new
+        useCORS: true, // new
         allowTaint: true,
         backgroundColor: null,
         width: EXPORT_W,
         logging: false,
         onclone: (doc: Document) => {
+          //this area is new, if it fails remove it
+          const dots = doc.querySelectorAll('.tpl-esi-dot');
+          dots.forEach((d) => {
+            (d as HTMLElement).style.transform = 'translateZ(0)';
+          });
+          //this area is new
           const s = doc.createElement("style");
           s.textContent = `
             @font-face { font-family:'STCForward'; src:url('${FONT_REG_B64}') format('truetype'); font-weight:400; }
-            @font-face { font-family:'STCForward'; src:url('${FONT_MED_B64}') format('truetype'); font-weight:00; }
+            @font-face { font-family:'STCForward'; src:url('${FONT_MED_B64}') format('truetype'); font-weight:500; }
           `;
           doc.head.appendChild(s);
         },
