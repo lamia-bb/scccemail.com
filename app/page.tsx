@@ -607,7 +607,7 @@ export default function App() {
         <div className="sidebar-body">
 
           <div className="field">
-            <label className="field-label">ESI Label</label>
+            <label className="field-label">From Label</label>
             <input
               className="bullet-input"
               type="text"
