@@ -2,7 +2,6 @@
 import { useState, useCallback, useEffect } from "react";
 
 // ── Embed STC Forward fonts as base64 ────────────────────────────────────────
-const FONT_BOLD_B64 = "/fonts/STCForward-Bold.ttf";
 const FONT_MED_B64 = "/fonts/STCForward-Medium.ttf";
 const FONT_REG_B64 = "/fonts/STCForward-Regular.ttf";
 const TEMPLATE_BG = "/background.png";
@@ -15,12 +14,6 @@ const injectStyles = () => {
       font-family: 'STCForward';
       src: url('${FONT_REG_B64}') format('truetype');
       font-weight: 400;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'STCForward';
-      src: url('${FONT_BOLD_B64}') format('truetype');
-      font-weight: 700;
       font-style: normal;
     }
       @font-face {
@@ -271,8 +264,8 @@ const injectStyles = () => {
     }
     .tpl-esi-label {
       font-size: 13px;
-      font-weight: 700;
-      color: var(--white);
+      font-weight: 500;
+      color: 9743D4;
       letter-spacing: 0.05em;
       font-family: var(--font);
     }
@@ -503,8 +496,8 @@ export default function App() {
           }
           @font-face {
             font-family: 'STCForward';
-            src: url('${FONT_BOLD_B64}') format('truetype');
-            font-weight: 700;
+            src: url('${FONT_MED_B64}') format('truetype');
+            font-weight: 500;
           }
         </style>
         <div style="width:${EXPORT_W}px;font-family:'STCForward',sans-serif;">
