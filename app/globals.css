@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -26,3 +28,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.export-container {
+  width: 600px;
+  /* lock layout */
+  max-width: 600px;
+}
