@@ -509,7 +509,7 @@ export default function App() {
           <div style="background:#4F008B;padding:0 44px 48px;font-family:'STCForward',sans-serif;">
             <!-- ESI -->
             <div style="display:flex;align-items:center;gap:10px;padding:20px 0 24px;">
-              <div style="width:10px;height:10px;background:#FF375E;border-radius:1px;flex-shrink:0;align-self:center;"></div>
+              <div style="width:10px;height:10px;background:#FF375E;border-radius:1px;flex-shrink:0;align-self:center;margin-top:1px;"></div>
               <span style="font-size:15px;font-weight:500;color:#9F4ADC;line-height:1;font-family:'STCForward',sans-serif;">${esiText}</span>
             </div>
             <!-- Title block -->
@@ -532,7 +532,7 @@ export default function App() {
             <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:12px;font-family:'STCForward',sans-serif;">${secTitle}</div>
             <div style="margin-bottom:18px;display:flex;flex-direction:column;gap:11px;">
               ${activeBullets.map(b => `
-                <div style="display:flex;gap:13px;align-items:flex-start;">
+                <div style="display:flex;gap:13px;align-items:center;">
                   <div style="width:10px;height:10px;background:#FF375E;border-radius:2px;flex-shrink:0;margin-top:5px;"></div>
                   <span style="font-size:15px;font-weight:400;color:#fff;line-height:1.6;word-break:break-word;font-family:'STCForward',sans-serif;">${b}</span>
                 </div>
