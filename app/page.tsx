@@ -265,7 +265,7 @@ const injectStyles = () => {
     .tpl-esi-label {
       font-size: 13px;
       font-weight: 500;
-      color: 9743D4;
+      color: #9743D4;
       letter-spacing: 0.05em;
       font-family: var(--font);
     }
