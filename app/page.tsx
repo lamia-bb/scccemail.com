@@ -265,8 +265,8 @@ const injectStyles = () => {
     }
 
     .tpl-esi-label {
-      font-size: 14px;       /* was 13px — 13 is odd, causes half-pixel line box */
-      line-height: 16px;     /* even, and matches dot vertical rhythm */
+      font-size: 13px;       /*reverted back to original values*/
+      line-height: 1.6;     
       font-weight: 500;
       color: #9743D4;
       letter-spacing: 0.05em;
@@ -320,8 +320,17 @@ const injectStyles = () => {
       margin-bottom: 10px;
       font-family: var(--font);
     }
-    .tpl-bullets { margin-bottom: 14px; display: flex; flex-direction: column; gap: 9px; }
-    .tpl-bullet { display: flex; gap: 10px; align-items: flex-start; }
+    .tpl-bullets { 
+      margin-bottom: 14px; 
+      display: flex;
+      flex-direction: column; 
+      gap: 9px; 
+      }
+    .tpl-bullet { 
+      display: flex; 
+      gap: 10px; 
+      align-items: flex-start; 
+    }
     .tpl-bullet-dot {
       width: 9px; height: 9px;
       background: var(--red);
