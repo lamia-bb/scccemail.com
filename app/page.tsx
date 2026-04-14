@@ -1,5 +1,7 @@
 "use client";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { toPng } from 'html-to-image';
+
 
 // ── Embed STC Forward fonts as base64 ────────────────────────────────────────
 const FONT_MED_B64 = "/fonts/STCForward-Medium.ttf";
@@ -478,7 +480,31 @@ export default function App() {
   const removeBullet = (i: number) => setBullets(b => b.filter((_, idx) => idx !== i));
   const updateBullet = (i: number, val: string) => setBullets(b => b.map((v, idx) => idx === i ? val : v));
 
-  const handleDownload = useCallback(async () => {
+
+
+  const handleExport = async () => {
+    const element = document.getElementById('export-content');
+    if (!element) return;
+
+    setLoading(true);
+    setSuccess(false);
+    try {
+      const dataUrl = await toPng(element, { pixelRatio: 2 });
+      const link = document.createElement('a');
+      link.download = 'email.png';
+      link.href = dataUrl;
+      link.click();
+      setSuccess(true);
+      setTimeout(() => setSuccess(false), 3000);
+    } catch (err) {
+      console.error(err);
+      alert('Export failed — please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /*const handleDownload = useCallback(async () => {
     setLoading(true);
     setSuccess(false);
 
@@ -607,7 +633,7 @@ export default function App() {
     } finally {
       setLoading(false);
     }
-  }, [esiText, title, content, bullets, sectionTitle, closingContent]);
+  }, [esiText, title, content, bullets, sectionTitle, closingContent]);*/
 
   const activeBulletCount = bullets.filter(b => b.trim()).length;
 
@@ -728,7 +754,7 @@ export default function App() {
             </div>
             <button
               className={`btn-download${success ? " success" : ""}`}
-              onClick={handleDownload}
+              onClick={handleExport}
               disabled={loading}
             >
               {loading ? <><div className="spinner" /> Exporting…</> :
@@ -747,7 +773,7 @@ export default function App() {
           <span className="preview-tag">Export · 1200 × auto · PNG</span>
         </div>
 
-        <div className="canvas-wrapper">
+        <div className="canvas-wrapper" id="export-content">
           <EmailTemplate esiText={esiText} title={title} content={content} bullets={bullets} sectionTitle={sectionTitle} closingContent={closingContent} />
         </div>
 
