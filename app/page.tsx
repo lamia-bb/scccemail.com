@@ -31,9 +31,9 @@ const injectStyles = () => {
 
     :root {
       --purple: #4F008B;
-      --red: #FF375E;
+      --coral: #FF375E;
       --white: #ffffff;
-      --sidebar-bg: #111120;
+      --sidebar-bg: #1a0a26;
       --border: #252538;
       --input-bg: #0a0a16;
       --muted: #6b6b88;
@@ -70,11 +70,11 @@ const injectStyles = () => {
       margin-bottom: 10px;
     }
     .brand-pill {
-      background: var(--red);
-      color: white;
+      background: color-mix(in srgb, var(--coral), transparent 50%);
+      color: var(--coral);
       font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+      font-weight: 500;
+      letter-spacing: 0.2em;
       padding: 3px 8px;
       border-radius: 3px;
       font-family: var(--font);
@@ -162,7 +162,7 @@ const injectStyles = () => {
       transition: all 0.15s;
       flex-shrink: 0;
     }
-    .btn-icon:hover { border-color: var(--red); color: var(--red); }
+    .btn-icon:hover { border-color: var(--coral); color: var(--coral); }
     .btn-add {
       background: transparent;
       border: 1px dashed var(--border);
@@ -335,7 +335,7 @@ const injectStyles = () => {
     }
     .tpl-bullet-dot {
       width: 9px; height: 9px;
-      background: var(--red);
+      background: var(--coral);
       border-radius: 1px;
       flex-shrink: 0;
       margin-top: 4px;
@@ -504,137 +504,6 @@ export default function App() {
     }
   };
 
-  /*const handleDownload = useCallback(async () => {
-    setLoading(true);
-    setSuccess(false);
-
-    try {
-      if (!window.html2canvas) {
-        await new Promise((res, rej) => {
-          const s = document.createElement("script");
-          s.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
-          s.onload = res; s.onerror = rej;
-          document.head.appendChild(s);
-        });
-      }
-
-      const EXPORT_W = 600;
-      const activeBullets = bullets.filter(b => b.trim());
-      const titleLines = (title || "Email Announcement Title").split("\n");
-      const mainTitle = titleLines[0] || "Email Announcement Title";
-      const subTitle = titleLines.slice(1).join(" ").trim();
-      const imgH = Math.round(EXPORT_W * 0.50);
-      const secTitle = sectionTitle || "What's changing";
-
-      // Build off-screen render node with fully inline styles + embedded fonts
-      const container = document.createElement("div");
-      container.style.cssText = `position:fixed;top:-9999px;left:-9999px;width:${EXPORT_W}px;overflow:hidden;`;
-      document.body.appendChild(container);
-
-      container.innerHTML = `
-        <style>
-          @font-face {
-            font-family: 'STCForward';
-            src: url('${FONT_REG_B64}') format('truetype');
-            font-weight: 400;
-          }
-          @font-face {
-            font-family: 'STCForward';
-            src: url('${FONT_MED_B64}') format('truetype');
-            font-weight: 500;
-          }
-        </style>
-        <div style="width:${EXPORT_W}px;font-family:'STCForward',sans-serif;">
-          <!-- Header image -->
-          <div style="position:relative;width:100%;height:${imgH}px;overflow:hidden;">
-            <img src="${TEMPLATE_BG}" style="position:absolute;top:0;left:0;width:100%;height:auto;display:block;" />
-          </div>
-          <!-- Purple body -->
-          <div style="background:#4F008B;padding:0 44px 48px;font-family:'STCForward',sans-serif;">
-            <!-- ESI -->
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div style="width:10px;height:10px;background:#FF375E;border-radius:1px;flex-shrink:0;"></div>
-              <span style="font-size:15px;font-weight:500;color:#9F4ADC;line-height:10px;font-family:'STCForward',sans-serif;">${esiText}</span>
-            </div>
-            <!-- Title block -->
-            <div style="margin-bottom:${subTitle ? "0" : "22px"};">
-              <div style="font-size:28px;font-weight:700;color:#fff;line-height:1.18;margin-bottom:${subTitle ? "5px" : "22px"};word-break:break-word;font-family:'STCForward',sans-serif;">
-                ${mainTitle}
-              </div>
-              ${subTitle ? `<div style="font-size:21px;font-weight:400;color:#fff;opacity:0.9;line-height:1.3;margin-bottom:22px;font-family:'STCForward',sans-serif;">${subTitle}</div>` : ""}
-            </div>
-            <!-- Salutation -->
-            <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:14px;font-family:'STCForward',sans-serif;">Dear Team,</div>
-            <!-- Content -->
-            ${content.trim() ? `
-            <div style="font-size:15px;font-weight:400;color:#fff;line-height:1.7;margin-bottom:18px;word-break:break-word;font-family:'STCForward',sans-serif;">
-              ${content.replace(/\n/g, "<br/>")}
-            </div>
-            ` : ""}
-            <!-- Bullets -->
-            ${activeBullets.length > 0 ? `
-            <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:12px;font-family:'STCForward',sans-serif;">${secTitle}</div>
-            <div style="margin-bottom:18px;display:flex;flex-direction:column;gap:11px;">
-              ${activeBullets.map(b => `
-                <div style="display:flex;gap:13px;align-items:center;">
-                  <div style="width:10px;height:10px;background:#FF375E;border-radius:1px;flex-shrink:0;"></div>
-                  <span style="font-size:15px;font-weight:400;color:#fff;line-height:1.25;word-break:break-word;font-family:'STCForward',sans-serif;">${b}</span>
-                </div>
-              `).join("")}
-            </div>
-            ` : ""}
-            <!-- Closing content -->
-            ${closingContent.trim() ? `
-            <div style="font-size:15px;font-weight:400;color:#fff;line-height:1.7;margin-bottom:18px;word-break:break-word;font-family:'STCForward',sans-serif;">
-              ${closingContent.replace(/\n/g, "<br/>")}
-            </div>
-            ` : ""}
-            <!-- Best regards -->
-            <div style="font-size:15px;font-weight:400;color:#FF375E;font-family:'STCForward',sans-serif;">Best regards,</div>
-          </div>
-        </div>
-      `;
-
-      // Wait for fonts to load inside the shadow node
-      await document.fonts.ready;
-      await new Promise(r => setTimeout(r, 700));
-
-      const el = container.querySelector("div:not(style)") || container.children[1];
-      const canvas = await window.html2canvas(el as HTMLElement, {
-        scale: 2,
-        allowTaint: true,
-        backgroundColor: null,
-        width: EXPORT_W,
-        logging: false,
-        onclone: (doc: Document) => {
-
-          const s = doc.createElement("style");
-          s.textContent = `
-            @font-face { font-family:'STCForward'; src:url('${FONT_REG_B64}') format('truetype'); font-weight:400; }
-            @font-face { font-family:'STCForward'; src:url('${FONT_MED_B64}') format('truetype'); font-weight:500; }
-          `;
-          doc.head.appendChild(s);
-        },
-      } as any); // <-- cast options as any
-
-      document.body.removeChild(container);
-
-      const link = document.createElement("a");
-      const slug = (mainTitle).toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 40);
-      link.download = `${slug}.png`;
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-
-      setSuccess(true);
-      setTimeout(() => setSuccess(false), 3000);
-    } catch (err) {
-      console.error(err);
-      alert("Export failed — please try again.");
-    } finally {
-      setLoading(false);
-    }
-  }, [esiText, title, content, bullets, sectionTitle, closingContent]);*/
-
   const activeBulletCount = bullets.filter(b => b.trim()).length;
 
   return (
@@ -644,7 +513,7 @@ export default function App() {
         <div className="sidebar-header">
           <div className="brand-row">
             <span className="brand-pill">sccc by stc</span>
-            <span className="brand-subtitle">by ESI · Announcement Studio</span>
+            <span className="brand-subtitle">by ESI · Studio</span>
           </div>
           <div className="sidebar-heading">Announcement<br />Generator</div>
         </div>
