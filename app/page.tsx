@@ -515,7 +515,7 @@ export default function App() {
             <span className="brand-pill">sccc by stc</span>
             <span className="brand-subtitle">by ESI · Studio</span>
           </div>
-          <div className="sidebar-heading">Announcement<br />Generator</div>
+          <div className="sidebar-heading">Announcement Generator</div>
         </div>
 
         <div className="sidebar-body">
