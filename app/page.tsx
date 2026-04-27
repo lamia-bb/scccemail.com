@@ -371,6 +371,7 @@ type EmailTemplateProps = {
   bullets?: string[];
   sectionTitle?: string;
   closingContent?: string;
+  headerVariant?: string;
 };
 
 
@@ -381,11 +382,20 @@ function EmailTemplate({
   content = "",
   bullets = [],
   sectionTitle = "",
-  closingContent = ""
+  closingContent = "",
+  headerVariant = "default"
 }: EmailTemplateProps) {
   const titleLines = title.split("\n");
   const mainTitle = titleLines[0] || "Email Announcement Title";
   const subTitle = titleLines.slice(1).join(" ").trim();
+
+  //header-template
+  const HEADER_VARIANTS: Record<string, string> = {
+    default: "/background.png",
+    alt1: "/background-alt1.png",
+    alt2: "/background-alt2.png",
+    alt3: "/background-alt3.png",
+  };
 
   // explicitly type `b` as string
   const activeBullets = bullets.filter((b: string) => b.trim());
@@ -395,8 +405,7 @@ function EmailTemplate({
       {/* Header image — top portion of the template background */}
       <div style={{ position: "relative", width: "100%", paddingBottom: "50%", overflow: "hidden" }}>
         <img
-          src={TEMPLATE_BG}
-          alt=""
+          src={HEADER_VARIANTS[headerVariant] || HEADER_VARIANTS.default}
           style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "auto", display: "block" }}
         />
       </div>
@@ -416,6 +425,11 @@ function EmailTemplate({
         <div className={subTitle ? "" : "tpl-title-only"}>
           <div className="tpl-title">{mainTitle}</div>
           {subTitle && <div className="tpl-subtitle">{subTitle}</div>}
+        </div>
+
+        <div className="field">
+          <label className="field-label">Header Design</label>
+
         </div>
 
         {/* Salutation — fixed */}
@@ -466,6 +480,7 @@ function EmailTemplate({
 // ── Main App ──────────────────────────────────────────────────────────────────
 export default function App() {
   const [esiText, setEsiText] = useState("ESI");
+  //const [headerVariant, setHeaderVariant] = useState("default"); //header-template constant
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [bullets, setBullets] = useState([""]);
@@ -473,6 +488,7 @@ export default function App() {
   const [closingContent, setClosingContent] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [headerVariant, setHeaderVariant] = useState("default");
 
   useEffect(() => { injectStyles(); }, []);
 
@@ -531,6 +547,17 @@ export default function App() {
               maxLength={50}
             />
           </div>
+
+          <select
+            className="field-input"
+            value={headerVariant}
+            onChange={(e) => setHeaderVariant(e.target.value)}
+          >
+            <option value="default">Default</option>
+            <option value="alt1">Variant 1</option>
+            <option value="alt2">Variant 2</option>
+            <option value="alt3">Variant 3</option>
+          </select>
 
           <div className="field">
             <label className="field-label">Email Title</label>
@@ -643,7 +670,7 @@ export default function App() {
         </div>
 
         <div className="canvas-wrapper" id="export-content">
-          <EmailTemplate esiText={esiText} title={title} content={content} bullets={bullets} sectionTitle={sectionTitle} closingContent={closingContent} />
+          <EmailTemplate headerVariant={headerVariant} esiText={esiText} title={title} content={content} bullets={bullets} sectionTitle={sectionTitle} closingContent={closingContent} />
         </div>
 
         <div className="preview-meta" style={{ justifyContent: "center" }}>
