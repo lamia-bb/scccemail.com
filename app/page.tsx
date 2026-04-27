@@ -548,16 +548,37 @@ export default function App() {
             />
           </div>
 
-          <select
-            className="field-input"
-            value={headerVariant}
-            onChange={(e) => setHeaderVariant(e.target.value)}
-          >
-            <option value="default">Default</option>
-            <option value="alt1">Variant 1</option>
-            <option value="alt2">Variant 2</option>
-            <option value="alt3">Variant 3</option>
-          </select>
+          <div className="field">
+            <label className="field-label">Header Design</label>
+
+            <div style={{ display: "flex", gap: 8 }}>
+              {Object.entries({
+                default: "/background.png",
+                alt1: "/background-alt1.png",
+                alt2: "/background-alt2.png",
+                alt3: "/background-alt3.png",
+              }).map(([key, src]) => (
+                <img
+                  key={key}
+                  src={src}
+                  onClick={() => setHeaderVariant(key)}
+                  style={{
+                    width: 60,
+                    height: 40,
+                    objectFit: "cover",
+                    cursor: "pointer",
+                    borderRadius: 6,
+                    border: headerVariant === key
+                      ? "2px solid #7c3aed"
+                      : "1px solid #333",
+                    opacity: headerVariant === key ? 1 : 0.7,
+                    transition: "all 0.15s"
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
 
           <div className="field">
             <label className="field-label">Email Title</label>
