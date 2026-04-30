@@ -693,7 +693,7 @@ export default function App() {
             <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
               <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 6px #22c55e" }} />
               <span style={{ fontSize: 11, color: "#3a3a58", fontFamily: "var(--font)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                STC Forward font active
+                DEVELOPED WITH PASSION  BY UX TEAM
               </span>
             </div>
             <button
