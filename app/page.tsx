@@ -442,16 +442,20 @@ function EmailTemplate({
         </div> hide header design label*/}
 
         {/* Salutation — fixed */}
-        <div className="tpl-salutation">Dear Team,</div>
+        {/* removing dear team <div className="tpl-salutation">Dear Team,</div>*/}
 
         {/* User content */}
         {content.trim() ? (
           <div
             className="tpl-para"
+            dir={isArabic(content) ? "rtl" : "ltr"}
+            style={{
+              textAlign: isArabic(content) ? "right" : "left"
+            }}
             dangerouslySetInnerHTML={{ __html: content.replace(/\n/g, "<br/>") }}
           />
         ) : (
-          <div className="tpl-para" dir={isRTL ? "rtl" : "ltr"} style={{ opacity: 0.4, textAlign: isRTL ? "right" : "left" }}>
+          <div className="tpl-para" style={{ opacity: 0.4 }}>
             Your announcement content will appear here…
           </div>
         )}
@@ -470,7 +474,15 @@ function EmailTemplate({
                   }}
                 >
                   <div className="tpl-bullet-dot" />
-                  <span className="tpl-bullet-text">{b}</span>
+                  <span
+                    className="tpl-bullet-text"
+                    dir={isArabic(b) ? "rtl" : "ltr"}
+                    style={{
+                      textAlign: isArabic(b) ? "right" : "left"
+                    }}
+                  >
+                    {b}
+                  </span>
                 </div>
               ))}
             </div>
@@ -615,9 +627,9 @@ export default function App() {
               placeholder={"We're excited to introduce a major enhancement to our Order-to-Cash process.\n\nVirtual Credit Allocation is now fully automated..."}
               value={content}
               onChange={e => setContent(e.target.value)}
-              maxLength={800}
+            /*maxLength={800}*/
             />
-            <span className={`char-count${content.length > 680 ? " warn" : ""}`}>{content.length} / 800</span>
+
           </div>
 
           <div className="divider" />
