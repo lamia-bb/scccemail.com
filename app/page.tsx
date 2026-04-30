@@ -333,10 +333,13 @@ const injectStyles = () => {
       flex-direction: column; 
       gap: 9px; 
       }
-    .tpl-bullet { 
-      display: flex; 
-      gap: 10px; 
-      align-items: flex-start; 
+    .tpl-bullet {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .tpl-bullet[dir="rtl"] {
+      flex-direction: row-reverse;
     }
     .tpl-bullet-dot {
       width: 9px; height: 9px;
@@ -448,9 +451,9 @@ function EmailTemplate({
         {content.trim() ? (
           <div
             className="tpl-para"
-            dir={isArabic(content) ? "rtl" : "ltr"}
+            dir="auto"
             style={{
-              textAlign: isArabic(content) ? "right" : "left"
+              textAlign: "start"
             }}
             dangerouslySetInnerHTML={{ __html: content.replace(/\n/g, "<br/>") }}
           />
@@ -469,20 +472,11 @@ function EmailTemplate({
                 <div
                   key={i}
                   className="tpl-bullet"
-                  style={{
-                    flexDirection: isRTL ? "row-reverse" : "row"
-                  }}
+                  dir="auto"
+                  style={{ textAlign: "start" }}
                 >
                   <div className="tpl-bullet-dot" />
-                  <span
-                    className="tpl-bullet-text"
-                    dir={isArabic(b) ? "rtl" : "ltr"}
-                    style={{
-                      textAlign: isArabic(b) ? "right" : "left"
-                    }}
-                  >
-                    {b}
-                  </span>
+                  <span className="tpl-bullet-text">{b}</span>
                 </div>
               ))}
             </div>
