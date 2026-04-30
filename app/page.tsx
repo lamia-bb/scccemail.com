@@ -449,14 +449,20 @@ function EmailTemplate({
 
         {/* User content */}
         {content.trim() ? (
-          <div
-            className="tpl-para"
-            dir="auto"
-            style={{
-              textAlign: "start"
-            }}
-            dangerouslySetInnerHTML={{ __html: content.replace(/\n/g, "<br/>") }}
-          />
+          <div className="tpl-para">
+            {content.split("\n\n").map((line, i) => (
+              <div
+                key={i}
+                dir="auto"
+                style={{
+                  textAlign: "start",
+                  marginBottom: "8px"
+                }}
+              >
+                {line}
+              </div>
+            ))}
+          </div>
         ) : (
           <div className="tpl-para" style={{ opacity: 0.4 }}>
             Your announcement content will appear here…
