@@ -409,11 +409,7 @@ function EmailTemplate({
   return (
     //check for RTL in root container
     <div
-      className="email-tpl"
-      dir={isRTL ? "rtl" : "ltr"}
-      style={{
-        textAlign: isRTL ? "right" : "left"
-      }}>
+      className="email-tpl">
       {/* Header image — top portion of the template background */}
       <div style={{ position: "relative", width: "100%", paddingBottom: "50%", overflow: "hidden" }}>
         <img
@@ -439,10 +435,11 @@ function EmailTemplate({
           {subTitle && <div className="tpl-subtitle">{subTitle}</div>}
         </div>
 
+        {/*
         <div className="field">
           <label className="field-label">Header Design</label>
 
-        </div>
+        </div> hide header design label*/}
 
         {/* Salutation — fixed */}
         <div className="tpl-salutation">Dear Team,</div>
@@ -454,7 +451,7 @@ function EmailTemplate({
             dangerouslySetInnerHTML={{ __html: content.replace(/\n/g, "<br/>") }}
           />
         ) : (
-          <div className="tpl-para" style={{ opacity: 0.4 }}>
+          <div className="tpl-para" dir={isRTL ? "rtl" : "ltr"} style={{ opacity: 0.4, textAlign: isRTL ? "right" : "left" }}>
             Your announcement content will appear here…
           </div>
         )}
