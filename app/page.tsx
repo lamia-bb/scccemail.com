@@ -8,6 +8,11 @@ const FONT_MED_B64 = "/fonts/STCForward-Medium.ttf";
 const FONT_REG_B64 = "/fonts/STCForward-Regular.ttf";
 const TEMPLATE_BG = "/background.png";
 
+//Check if text contains arabic text
+const isArabic = (text: string) => {
+  return /[\u0600-\u06FF]/.test(text);
+};
+
 // ── Inject @font-face + global styles via a style tag ────────────────────────
 const injectStyles = () => {
   const style = document.createElement("style");
@@ -388,6 +393,7 @@ function EmailTemplate({
   const titleLines = title.split("\n");
   const mainTitle = titleLines[0] || "Email Announcement Title";
   const subTitle = titleLines.slice(1).join(" ").trim();
+  const isRTL = isArabic(content || title || ""); //new const
 
   //header-template
   const HEADER_VARIANTS: Record<string, string> = {
@@ -401,7 +407,13 @@ function EmailTemplate({
   const activeBullets = bullets.filter((b: string) => b.trim());
 
   return (
-    <div className="email-tpl">
+    //check for RTL in root container
+    <div
+      className="email-tpl"
+      dir={isRTL ? "rtl" : "ltr"}
+      style={{
+        textAlign: isRTL ? "right" : "left"
+      }}>
       {/* Header image — top portion of the template background */}
       <div style={{ position: "relative", width: "100%", paddingBottom: "50%", overflow: "hidden" }}>
         <img
@@ -453,7 +465,13 @@ function EmailTemplate({
             <div className="tpl-section-title">{sectionTitle || "What's changing"}</div>
             <div className="tpl-bullets">
               {activeBullets.map((b, i) => (
-                <div key={i} className="tpl-bullet">
+                <div
+                  key={i}
+                  className="tpl-bullet"
+                  style={{
+                    flexDirection: isRTL ? "row-reverse" : "row"
+                  }}
+                >
                   <div className="tpl-bullet-dot" />
                   <span className="tpl-bullet-text">{b}</span>
                 </div>
